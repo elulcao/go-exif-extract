@@ -67,7 +67,7 @@ func readDirAndSubdirs(path string, subdir bool, images *[]string) (files []stri
 	}
 	defer dir.Close()
 
-	fileInfo, err := dir.Readdir(-1)
+	fileInfo, err := dir.ReadDir(-1)
 	if err != nil {
 		return nil, fmt.Errorf("failed to read directory %s: %w", path, err)
 	}
@@ -87,7 +87,7 @@ func readDirAndSubdirs(path string, subdir bool, images *[]string) (files []stri
 		}
 	}
 
-	// Filter the files to only include jpg images
+	// Filter the files to only include images
 	for _, file := range files {
 		isImage, err := checkFileIsImage(file)
 		if err != nil {
@@ -100,6 +100,7 @@ func readDirAndSubdirs(path string, subdir bool, images *[]string) (files []stri
 	}
 
 	*images = append(*images, files...)
+
 	return files, nil
 }
 
